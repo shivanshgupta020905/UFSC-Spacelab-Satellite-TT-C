@@ -5,8 +5,7 @@ This repo holds the work I've done so far during my remote internship with **Spa
 the telecommunications (TTC 2.0) subsystem.
 
 I'm organizing this chronologically, task by task, since that's genuinely the order I learned
-things in — each task builds directly on the one before it. If you're going through this repo
-for the first time, reading the folders in order (1 → 2 → 3) will make the most sense.
+things in — each task builds directly on the one before it.
 
 ## Task Overview
 
