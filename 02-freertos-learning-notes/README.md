@@ -8,9 +8,6 @@ what's happening underneath. This file is basically my own notes from going thro
 official FreeRTOS documentation and connecting each concept to what I'd actually need for
 the CubeSat pipeline (tasks talking to each other through queues).
 
-I'm keeping this in "notes + code snippet" form rather than a polished writeup, because
-that's genuinely how I studied it — read a concept, try it in a tiny throwaway test, write
-down what I understood.
 
 ---
 
