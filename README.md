@@ -10,7 +10,7 @@ for the first time, reading the folders in order (1 → 2 → 3) will make the m
 
 ## Task Overview
 
-### 📡 [01 — NGHam Python Task](./01-ngham-python-task)
+### [01 — NGHam Python Task](./01-ngham-python-task)
 The very first task. Before writing any embedded C code, I used the existing `pyngham` Python
 library to actually understand the NGHam protocol — how a payload gets encoded into a full
 frame, how Reed-Solomon error correction recovers corrupted bytes, and how extension packets
@@ -18,14 +18,14 @@ frame, how Reed-Solomon error correction recovers corrupted bytes, and how exten
 firmware yet, just Python scripts and printed output to build real intuition about what NGHam
 actually does under the hood.
 
-### ⚙️ [02 — Learning FreeRTOS (Notes)](./02-freertos-learning-notes)
+### [02 — Learning FreeRTOS (Notes)](./02-freertos-learning-notes)
 Once I knew *what* NGHam does, I needed to learn *how* to actually run this logic on the
 MSP430 — which meant learning FreeRTOS. This folder is my own study notes (not a polished
 tutorial) covering tasks, task states, priorities, and queues, each one tied directly back to
 how I ended up using it in Task 3's pipeline. Written the way I actually studied it: read a
 concept, connect it to the real pipeline, write down what clicked.
 
-### 🛰️ [03 — Payload Memory Reading + Packet Transmission Task](./03-payload-memory-reading-task)
+### [03 — Payload Memory Reading + Packet Transmission Task](./03-payload-memory-reading-task)
 This is where everything comes together — a 3-task FreeRTOS pipeline in C that simulates
 reading payload memory (mock occultation event data for now), fragmenting it into fixed-size
 chunks, passing those chunks through a queue manager, and encoding each one into a real NGHam
