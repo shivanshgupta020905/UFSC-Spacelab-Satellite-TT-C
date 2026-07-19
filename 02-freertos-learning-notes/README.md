@@ -33,9 +33,8 @@ A task in FreeRTOS is created with:
 xTaskCreate(vTask1_PayloadMemReader, "Task1", configMINIMAL_STACK_SIZE * 2, NULL, 1, NULL);
 ```
 The arguments (in order) are: the function to run, a name for debugging, how much stack
-space to give it, a parameter pointer (I don't use this, hence `NULL`), the task's
-**priority**, and a handle pointer (also `NULL` since I don't need to reference the task
-later).
+space to give it, a parameter pointer, the task's
+**priority**, and a handle pointer.
 
 Every task in FreeRTOS is always in one of these states:
 - **Running** — actually executing on the CPU right now
