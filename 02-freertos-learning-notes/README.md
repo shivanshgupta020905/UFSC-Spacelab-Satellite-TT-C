@@ -59,10 +59,12 @@ they time-slice between each other (each gets a turn, round-robin style) — whi
 why priority `1` for all three worked fine for my pipeline: they're not fighting each other
 for urgency, they just each get a turn to check their queue and do their bit of work.
 
-If, say, the NGHam encoder task (Task 3) had a lower priority than the memory reader (Task 1),
-and both were Ready at the same time, Task 1 would always win, potentially starving Task 3.
-Something to be careful of once this project gets more complex (e.g. if a radio-transmit task
-needs to be more time-critical than a background housekeeping task).
+If the memory reader (Task 1) had a higher priority than the NGHam encoder (Task 3) and 
+remained Ready without blocking, it could monopolize the CPU and delay or even starve Task 3.
+In this project, however, each task blocks on its queue after finishing its work, so starvation 
+is unlikely. Since these tasks are stages of the same processing pipeline rather than competing
+for CPU time, assigning them equal priority is appropriate.
+
 
 ## 4. Queues — how tasks talk to each other safely
 
