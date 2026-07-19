@@ -41,10 +41,10 @@ Code Composer Studio.
 ```
 Task 1 (NGHam in Python)          ─┐
   "what does NGHam actually do?"   │
-                                    ├─► gave me the protocol understanding
+                                   ├─► gave me the protocol understanding
 Task 2 (FreeRTOS notes)           ─┤    needed to build...
   "how do tasks/queues work?"      │
-                                    │
+                                   │
 Task 3 (C pipeline)               ─┘
   actual FreeRTOS tasks + queues
   + a real NGHam encoder in C
