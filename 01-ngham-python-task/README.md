@@ -8,7 +8,7 @@ as a protocol — not as embedded code, but as pure logic. The idea was: use the
 telemetry data, and watch what comes out the other end. This way I'd understand what "encoding
 a packet" actually means before I try to write it myself in C for the MSP430.
 
-So this isn't a from-scratch implementation — it's me poking at an existing library to learn:
+So this isn't a from-scratch implementation — it's me experimenting around at an existing library to learn:
 - how a payload turns into a full NGHam frame
 - how Reed-Solomon error correction actually recovers corrupted bytes (not just in theory)
 - how the "extension packets" (id / status / time-of-hour) get packed together
