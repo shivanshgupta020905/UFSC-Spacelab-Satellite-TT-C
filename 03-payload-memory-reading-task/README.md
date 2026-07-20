@@ -288,17 +288,3 @@ This function returns `-1` if the payload is too big for even the largest size c
 checks for this and logs an error rather than silently building a broken frame.
 
 ---
-
-## What's next for this pipeline
-
-- Fix the GF(256) field polynomial / generator root to exactly match the official NGHam spec,
-  so frames built here would be decodable by the real ground-station-side NGHam decoder (or
-  `pyngham` from Task 1) without modification.
-- Add the actual decode path (currently this only encodes) so I can round-trip test this C
-  implementation the same way I tested `pyngham` in Task 1 — encode here, decode with
-  `pyngham`, confirm they match.
-- Replace the mock occultation events with a real payload memory read function once I have
-  access to the actual EDC/payload memory interface on hardware.
-- Port this from the POSIX simulator over to the actual MSP430 target in Code Composer Studio,
-  which will mean swapping out `printf`-based debug logging for whatever UART/debug logging
-  convention the rest of the TTC 2.0 firmware uses.
