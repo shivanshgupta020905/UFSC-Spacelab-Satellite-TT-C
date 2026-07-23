@@ -33,7 +33,7 @@ NGHam implementation I wrote from scratch in C. Currently runs on the FreeRTOS P
 (via WSL) so the logic can be fully tested before it needs to run on actual MSP430 hardware in
 Code Composer Studio.
 
-### [04 — Housekeeping / Telemetry Task](./04-housekeeping-telemetry-task)
+### [04 — Housekeeping / Telemetry Task](./04-Housekeeping-Telemetry-Task)
 Task 3's pipeline moves payload data, but says nothing about its own health — how full the
 queues are, how fast data is actually flowing, whether anything's being dropped. This task
 adds a separate module that watches the pipeline from the outside and keeps a live status
