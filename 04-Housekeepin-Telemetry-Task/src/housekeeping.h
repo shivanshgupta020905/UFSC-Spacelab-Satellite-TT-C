@@ -23,7 +23,7 @@ typedef struct
     uint32_t chunk_overflow_count;   /* cumulative count of chunks dropped because a queue was full */
 } HousekeepingData_t;
 
-/* Call this once in main(), BEFORE vTaskStartScheduler(). It creates the
+/* Call this once in main(), before vTaskStartScheduler(). It creates the
  * length-1 queue that carries the latest housekeeping snapshot. */
 void Housekeeping_Init(void);
 
