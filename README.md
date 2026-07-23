@@ -33,7 +33,7 @@ NGHam implementation I wrote from scratch in C. Currently runs on the FreeRTOS P
 (via WSL) so the logic can be fully tested before it needs to run on actual MSP430 hardware in
 Code Composer Studio.
 
-### 🩺 [04 — Housekeeping / Telemetry Task](./04-housekeeping-telemetry-task)
+### [04 — Housekeeping / Telemetry Task](./04-housekeeping-telemetry-task)
 Task 3's pipeline moves payload data, but says nothing about its own health — how full the
 queues are, how fast data is actually flowing, whether anything's being dropped. This task
 adds a separate module that watches the pipeline from the outside and keeps a live status
@@ -48,14 +48,20 @@ the TT&C module's job to transmit it periodically, not this one's. Uses a FreeRT
 
 ```
 Task 1 (NGHam in Python)          ─┐
-  "what does NGHam actually do?"   │
+-- "what does NGHam actually do?"  │
                                    ├─► gave me the protocol understanding
 Task 2 (FreeRTOS notes)           ─┤    needed to build...
-  "how do tasks/queues work?"      │
+-- "how do tasks/queues work?"     │
                                    │
 Task 3 (C pipeline)               ─┘
-  actual FreeRTOS tasks + queues
-  + a real NGHam encoder in C
+-- actual FreeRTOS tasks + queues
+   + a real NGHam encoder in C
+            │
+            ▼
+Task 4 (Housekeeping module)
+-- watches the pipeline from outside,
+   publishes live telemetry for TT&C
+   to include in its own downlink
 ```
 
 ## A note on where this stands
