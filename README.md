@@ -33,6 +33,15 @@ NGHam implementation I wrote from scratch in C. Currently runs on the FreeRTOS P
 (via WSL) so the logic can be fully tested before it needs to run on actual MSP430 hardware in
 Code Composer Studio.
 
+### 🩺 [04 — Housekeeping / Telemetry Task](./04-housekeeping-telemetry-task)
+Task 3's pipeline moves payload data, but says nothing about its own health — how full the
+queues are, how fast data is actually flowing, whether anything's being dropped. This task
+adds a separate module that watches the pipeline from the outside and keeps a live status
+struct up to date, following the same pattern as `radio_data_t` in the TTC 2.0 firmware.
+Per direct team feedback, this module only *maintains* the telemetry continuously — it's
+the TT&C module's job to transmit it periodically, not this one's. Uses a FreeRTOS length-1
+"mailbox" queue instead of a mutex to publish the latest snapshot safely between tasks.
+
 ---
 
 ## How the three tasks connect
