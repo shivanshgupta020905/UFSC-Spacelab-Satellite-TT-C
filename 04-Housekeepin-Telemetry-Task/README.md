@@ -129,7 +129,7 @@ activity, since real payload events could arrive at any time.
 
 ## The one change needed in Task 1
 
-`chunk_overflow_count` could never become non-zero as long as Task 1 sent with
+`chunk_overflow_count` could never become non-zero as long as Task 1 (i.e. PayloadMemReader in main.c) sent with
 `portMAX_DELAY`, since that blocks forever instead of ever failing. Task 1's send is now
 bounded (`pdMS_TO_TICKS(50)`), and a failed send increments `g_chunks_lost` and drops the
 chunk rather than stalling the whole pipeline waiting for space that might not come — a
