@@ -60,21 +60,17 @@ typedef struct
   **chunk counts**, generation/tx rate are **chunks/s** (Task4 samples on a fixed 1-second
   period, so "per period" and "per second" are numerically identical).
 
-## Why a length-1 mailbox queue instead of a mutex
+## Housekeeping data is published through a length-1 mailbox queue
 
-The first version of this used a mutex around the struct. A mutex protects a region of
-code, and every caller is responsible for correctly taking and giving it back — miss a
-`xSemaphoreGive()` on an error path and every future caller blocks forever.
+What's needed here is: one task publishes a value, other tasks read the *latest* value.
+FreeRTOS has a purpose-built pattern for exactly that — a queue of length 1 (a "mailbox").
+`xQueueCreate(1, sizeof(HousekeepingData_t))` creates a queue that holds exactly one item,
+and all the locking needed to make that safe across tasks happens inside the queue's own
+implementation.
 
-What's actually needed here is narrower: one task publishes a value, other tasks read the
-*latest* value. FreeRTOS has a purpose-built pattern for exactly that — a queue of length 1
-(a "mailbox"). `xQueueCreate(1, sizeof(HousekeepingData_t))` creates a queue that holds
-exactly one item, and the locking that would otherwise be manual with a mutex happens
-inside the queue's own implementation instead.
-
-- **`xQueueOverwrite()`** replaces whatever's in the single slot instead of requiring it to
-  be empty first — a normal `xQueueSend()` would only succeed once on a length-1 queue.
-- **`xQueuePeek()`** copies the item out *without* removing it, so the same reading stays
+- `xQueueOverwrite()` replaces whatever's in the single slot instead of requiring it to be
+  empty first — a normal `xQueueSend()` would only succeed once on a length-1 queue.
+- `xQueuePeek()` copies the item out *without* removing it, so the same reading stays
   available for every future reader until Task4 overwrites it with the next period's data —
   unlike `xQueueReceive()`, which would empty the mailbox after the first read.
 - **0-tick timeout on the peek** — if TT&C reads before Task4's first period completes, the
